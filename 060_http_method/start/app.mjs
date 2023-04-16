@@ -14,8 +14,14 @@ import * as http from 'http';
 
 const server = http.createServer(function (req, res) {
   console.log(req.url);
-  if (req.url === '/hello') {
-    res.end(`<h1>こんにちは</h1>`);
+  if (req.url === '/') {
+    res.write(`<a href="/result?param1=パラメータ1&param2=パラメータ2">Get Method Link</a>`);
+    res.end(`
+      <form action="/result" method="POST">
+        <input type="text" name="title">
+        <input type="submit">
+      </form>
+    `);
   } else if (req.url === '/bye') {
     res.end('bye');
   } else {
