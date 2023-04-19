@@ -3,11 +3,14 @@ import express from "express";
 const app = express();
 const PORT = 8080;
 
+app.use(express.urlencoded({extended: true}));
+
 app.get("/", function(req, res) {
   res.send(`
     <a href="/result?param1=1&param2=2">Get Method Link</a>
     <form action="/result" method="POST">
-      <input type="text" name="title">
+      <input type="text" name="title[]">
+      <input type="text" name="title[]">
       <input type="text" name="description">
       <input type="submit">
     </form>
@@ -16,6 +19,11 @@ app.get("/", function(req, res) {
 
 app.get("/result", function(req, res) {
   const params = req.query;
+  console.log(params);
+});
+
+app.post("/result", function(req, res) {
+  const params = req.body;
   console.log(params);
 });
 
