@@ -11,8 +11,12 @@
 ###
 GET http://localhost:8080/products
 
+###
+GET http://localhost:8080/products/2
+
 ### 
-POST http://localhost:8080/create-product
+# POST http://localhost:8080/create-product
+POST http://localhost:8080/products
 content-type: application/json
 
 {
@@ -21,18 +25,14 @@ content-type: application/json
 }
 
 ### delete
-POST http://localhost:8080/delete-product
-content-type: application/json
-
-{
-  "id": 1
-}
+# POST http://localhost:8080/delete-product
+DELETE http://localhost:8080/products/1
 
 ### update
-PATCH http://localhost:8080/update-product
+# PATCH http://localhost:8080/update-product
+PATCH http://localhost:8080/products/2
 content-type: application/json
 
 {
-  "id": 2,
   "price": 100
 }
