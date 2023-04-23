@@ -20,8 +20,12 @@ app.use(express.json());
 
 // ミドルウェア：ルートハンドラの前後に行われる処理
 app.use('/', function(req, res, next) {
-  console.log('/ start');
-  next();
+  console.log('/ start1');
+  // res.send({ message: 'hello'});
+  if(true){
+    return next('errorが発生しました。');
+  }
+  console.log('/ start2');
 });
 
 app.use('/', function(req, res, next) {
@@ -38,6 +42,13 @@ app.get('/*', function(req, res, next) {
 app.get('/api', function(req, res, next) {
   console.log('/ get2');
 });
+
+app.use(function(error, req, res, next){
+  if(res.headerSent){
+    return next(error);
+  }
+  res.json({ error: error})
+})
 
 app.listen(PORT, function () {
   console.log(`Server start: http://localhost:${PORT}`);
